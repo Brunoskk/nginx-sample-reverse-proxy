@@ -1,0 +1,33 @@
+version: '3'
+
+networks:
+  local:
+    driver: bridge
+
+services:
+  nginx:
+    container_name: nginx
+    hostname: nginx
+    networks:
+      - local
+    build:
+      context: ./nginx-reverse-proxy/
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+  server-one:
+    container_name: server-one
+    hostname: server-one
+    networks:
+      - local
+    build:
+      context: ./server-01/
+      dockerfile: Dockerfile
+  server-two:
+    container_name: server-two
+    hostname: server-two
+    networks:
+      - local
+    build:
+      context: ./server-02/
+      dockerfile: Dockerfile
